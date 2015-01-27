@@ -16,6 +16,7 @@
   * Page reference
   * URLs for web resources and dates when you accessed the resource
   * Digital Object Identifiers
+* The Biblography should be annotated, discussing and explaining if/why the source was useful
 
   ## Bibliography Styles
 * Author-Date (Harvard)
