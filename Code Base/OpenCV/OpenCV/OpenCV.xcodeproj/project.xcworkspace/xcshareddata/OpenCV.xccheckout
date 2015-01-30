@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8AAED3DC-6FE5-485F-AC9C-BE6089CE250E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OpenCV</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>602E3A96AD46232457C586D3D384BAD2913EC400</key>
+		<string>https://github.com/alxstuart/DissRepo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Code Base/OpenCV/OpenCV/OpenCV.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>602E3A96AD46232457C586D3D384BAD2913EC400</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/alxstuart/DissRepo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>602E3A96AD46232457C586D3D384BAD2913EC400</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>602E3A96AD46232457C586D3D384BAD2913EC400</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DissRepo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
