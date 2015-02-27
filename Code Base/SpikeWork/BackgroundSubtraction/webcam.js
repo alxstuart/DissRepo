@@ -3,8 +3,8 @@
 
   var video, width, height, context;
   var bufidx = 0, buffers = [];
-  var buffsize=20;
-  var thresholdsize = 20;
+  var buffsize=10;
+  var thresholdsize = 10;
 
   function initialize() {
     // createVideo video.
@@ -13,40 +13,62 @@
     height = video.height;
 
 
-
     // The target canvas.
     var canvas = doc.getElementById("c");
     context = canvas.getContext("2d");
 
-    // Prepare buffers to store video data.
-    for (var i = 0; i < buffsize; i++) { //
-      buffers.push(new Uint8Array(width * height));
-    }
+    bufferPrepare(buffsize);
+
 
     // Get the webcam's stream.
     nav.getUserMedia({video: true}, startStream, function () {});
+
+    var gui = new dat.gui.GUI();
+
+
+    // GUI editor object
+    var obj = {
+	  buffer: buffsize,
+	  threshold: thresholdsize
+    };
+
+
+
+
+    // Number field with slider
+    gui.add(obj, "buffer").min(1).max(40).step(1).onChange(function(newValue) {
+      bufferPrepare(newValue);
+      console.log("buffer size" + buffers.length);
+    });
+
+
+    // Number field with slider
+    gui.add(obj, "threshold").min(1).max(30).step(1).onChange(function(newValue) {
+      thresholdsize = newValue;
+    });
+
   }
 
   function startStream(stream) {
     video.src = URL.createObjectURL(stream);
     video.play();
 
-    // Ready! Let's start drawing.
+    //draw frames
     requestAnimationFrame(draw);
   }
-
-  function bufferUpdate(bufferval) {
-    buffsize = bufferval;
-    doc.querySelector('#buffer').value = bufferval;
-    console.log(bufferval);
+  // Prepare buffers to store video data.
+  function bufferPrepare(bufferval) {
+    buffers = [];
+    for (var i = 0; i < bufferval; i++) { //
+      buffers.push(new Uint8Array(width * height));
+    }
 }
 
   function draw() {
-    var frame = readFrame();
-
+    var frame = readFrame(); //read frame from video
     if (frame) {
-      markLightnessChanges(frame.data);
-      context.putImageData(frame, 0, 0);
+      measureLightChanges(frame.data); //if videofeed is available, measure changes
+      context.putImageData(frame, 0, 0); //put details in
     }
 
     // Wait for the next frame.
@@ -64,13 +86,13 @@
     return context.getImageData(0, 0, width, height);
   }
 
-  function markLightnessChanges(data) {
+  function measureLightChanges(data) {
     // Pick the next buffer (round-robin).
     var buffer = buffers[bufidx++ % buffers.length];
 
     for (var i = 0, j = 0; i < buffer.length; i++, j += 4) {
       // Determine lightness value.
-      var current = lightnessValue(data[j], data[j + 1], data[j + 2]);
+      var current = greyScale(data[j], data[j + 1], data[j + 2]);
 
       // Set color to black.
       data[j] = data[j + 1] = data[j + 2] = 0;
@@ -89,7 +111,7 @@
     });
   }
 
-  function lightnessValue(r, g, b) {
+  function greyScale(r, g, b) {
     return (Math.min(r, g, b) + Math.max(r, g, b)) / 255 * 50;
   }
 

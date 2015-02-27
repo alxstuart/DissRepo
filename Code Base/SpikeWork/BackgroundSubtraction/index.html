@@ -12,8 +12,8 @@
 }
       </style>
        <link rel="stylesheet" href="rangeslider.css">
+      <script type="text/javascript" src="dat.gui.min.js"></script>
       <script src="webcam.js"></script>
-      <script src="rangeslider.min.js"></script>
       <script src="shiv.js"></script>
 
 
@@ -22,16 +22,8 @@
   <body>
     <video id="v" width="320" height="240"></video>
     <canvas id="c" width="320" height="240"></canvas>
-    <label for=fader>Buffer Size</label>
-<input type=range min=0 max=25 value=2 id=buffer step=1 oninput="bufferUpdate(value)">
-<output for=fader id=volume>2</output>
 
 
   </body>
-<script>
 
-function bufferUpdate(buffval) {
-document.querySelector('#buffer').value = buffval;
-}
-</script>
 </html>
