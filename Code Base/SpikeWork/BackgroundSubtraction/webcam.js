@@ -2,7 +2,7 @@
   "use strict";
 
   var video, width, height, context;
-  var bufidx = 0, buffers = [];
+  var bufidx = 0, bufferArray = [];
   var buffsize=10;
   var thresholdsize = 10;
 
@@ -38,7 +38,7 @@
     // Number field with slider
     gui.add(obj, "buffer").min(1).max(40).step(1).onChange(function(newValue) {
       bufferPrepare(newValue);
-      console.log("buffer size" + buffers.length);
+      console.log("buffer size" + bufferArray.length);
     });
 
 
@@ -56,11 +56,11 @@
     //draw frames
     requestAnimationFrame(draw);
   }
-  // Prepare buffers to store video data.
+  // Prepare bufferArray to store video data.
   function bufferPrepare(bufferval) {
-    buffers = [];
+    bufferArray = [];
     for (var i = 0; i < bufferval; i++) { //
-      buffers.push(new Uint8Array(width * height));
+      bufferArray.push(new Uint8Array(width * height));
     }
 }
 
@@ -88,11 +88,12 @@
 
   function measureLightChanges(data) {
     // Pick the next buffer (round-robin).
-    var buffer = buffers[bufidx++ % buffers.length];
+    var buffer = bufferArray[bufidx++ % bufferArray.length];
 
     for (var i = 0, j = 0; i < buffer.length; i++, j += 4) {
       // Determine lightness value.
       var current = greyScale(data[j], data[j + 1], data[j + 2]);
+
 
       // Set color to black.
       data[j] = data[j + 1] = data[j + 2] = 0;
@@ -106,7 +107,7 @@
   }
 //threshold for change in the system
   function lightnessHasChanged(index, value) {
-    return buffers.some(function (buffer) {
+    return bufferArray.some(function (buffer) {
       return Math.abs(value - buffer[index]) >= thresholdsize;
     });
   }
