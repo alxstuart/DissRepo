@@ -22,29 +22,10 @@
 
     // Get the webcam's stream.
     nav.getUserMedia({video: true}, startStream, function () {});
-    //place
-    
-    dat.gui.GUI.autoPlace = false;
-    var gui = new dat.gui.GUI();
-    /*gui.domElement.style.position = "absolute";
-    gui.domElement.style.top = "20px";
-    gui.domElement.style.left = "20px";
-    doc.getElementById("gui").appendChild( gui.domElement );
-    */
-    var mySlider = new dhtmlxSlider("sliderObj", {
-        size:   100,           
-        step:   1,
-        min:    1,
-        max:    40,
-        value:  20
-    });
-    mySlider = new dhtmlXSlider({
-        parent: "sliderObj",
-        linkTo: "sliderLink"
-      });
-      
 
-  
+    var gui = new dat.gui.GUI();
+
+
     // GUI editor object
     var obj = {
 	  buffer: buffsize,
